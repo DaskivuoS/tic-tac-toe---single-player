@@ -84,3 +84,62 @@ this function co-ordinates the calling of all the other functions
 this brings about the truly intelligent gaming system
 this function returns no value
 ----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+now the functions that are needed for proper working of the game    \|
+these do not necessarily go with the intelligence                   /|
+----------------------------------------------------------------------
+>>locate1(),locate2()...locate9()
+takes no input
+returns nothing
+these help identify the cells in question and assigns features such as
+ visibility
+ clickabiliy
+ shape assigned
+to the cell in question
+----------------------------------------------------------------------
+>>blockall()
+takes no input
+returns nothing
+this makes every cell unclickable
+>>freeall()
+takes no input
+returns nothing
+this makes every cell clickable
+----------------------------------------------------------------------
+>>evaluate()
+takes no input
+returns nothing
+this evaluates the ongoings of the match and sees if there is a winner
+----------------------------------------------------------------------
+>>display_player()
+takes no input
+returns nothing
+this displays the name of the player whose turn it is
+----------------------------------------------------------------------
+>>showbutt()
+takes no input
+returns nothing
+this brings forth the menubar with options to pick from
+>>togame()
+takes no input
+returns nothing
+this takes back the menu bar and brings the table in front for game
+>>refresh()
+takes no input
+returns nothing
+this refreshes the set to load a new game
+----------------------------------------------------------------------
+>>highlight(x,y)
+it takes the coordinates of a cell as input
+it highlights the cell by twerking the background color and font color
+----------------------------------------------------------------------
+
+----------------------------------------------------------------------
+how does the simple gamer work ?                                     \
+this is explained in brief in the following section                  /
+----------------------------------------------------------------------
+we check for the cells taken and deduct the cells not taken
+we run a random number and pick a random cell
+if the cell is not taken, we choose that cell
+done !

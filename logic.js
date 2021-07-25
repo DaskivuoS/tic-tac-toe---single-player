@@ -249,7 +249,7 @@ function evaluate()
     //the whole array is sweeped for table[i][0,1,2] being the same for horizontal match
     //the whole array is sweeped for table[0,1,2][j] being the same for vertical match
 
-    for( var i=0;i<3;i++)
+    for( var i=0;i<3;i++) //------------------------------------------------------------horizontal win !
     {
     	var valueoffirst = table[i][0];
     	var valueofsecond = table[i][1];
@@ -262,10 +262,14 @@ function evaluate()
                 document.getElementById('winner').innerHTML = "Player "+current_player+" wins the game !";
     		    //all the buttons must be frozen immediately so that no button can be pressed further
     		    blockall();
+                //now we need to highlight the winning areas
+                highlight(i,0);
+                highlight(i,1);
+                highlight(i,2);
     		    break;
     		}
     }
-    for( var i=0;i<3;i++)
+    for( var i=0;i<3;i++) //------------------------------------------------------------vertical win !
     {
     	var valueoffirst = table[0][i];
     	var valueofsecond = table[1][i];
@@ -278,6 +282,10 @@ function evaluate()
                 document.getElementById('winner').innerHTML = "Player "+current_player+" wins the game !";
                 //all the buttons must be frozen immediately so that no button can be pressed further
     		    blockall();
+                //now we need to highlight the winning areas
+                 highlight(0,i);
+                 highlight(1,i);
+                 highlight(2,i);
     		    break;
     		}
     }
@@ -297,20 +305,28 @@ function evaluate()
     var four = table[2][0];
     var five = table[2][2];
     //left to right diagonal
-    if(one==three && three==five)
+    if(one==three && three==five) //-----------------------------------------------------diagonal win !
     {
     	console.log("it is a win, a diagonal cut form left top to right bottom by "+current_player+"  !");
         document.getElementById('winner').innerHTML = "Player "+current_player+" wins the game !";
         //all the buttons must be frozen immediately so that no button can be pressed further
     	blockall();
+        //now we need to highlight the winning areas
+        highlight(0,0);
+        highlight(1,1);
+        highlight(2,2);
     }
     //right to left diagonal
-    if(two==three && three==four)
+    if(two==three && three==four) //-----------------------------------------------------diagonal win !
     {
     	console.log("it is a win, a diagonal cut from right tp to left bottom by "+current_player+" !");
         document.getElementById('winner').innerHTML = "Player "+current_player+" wins the game !";
         //all the buttons must be frozen immediately so that no button can be pressed further
     	blockall();
+        //now we need to highlight the winning areas
+        highlight(0,2);
+        highlight(1,1);
+        highlight(2,0);
     }
     current_player ++;
     if(current_player == 3)
@@ -389,7 +405,39 @@ function refresh()
     //we need to make the page scroll to the top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-//this line was added just to make the number of lines of code to 333 because it felt awesome
+//this section works on highlighting the deemed cell
+function highlight(x,y)
+{
+    //it takes the coordinates and highlights the cell
+
+    //first it needs to locate the targetted division
+    var location = "";
+    if(x==0 && y==0)
+        location = "one";
+    if(x==0 && y==1)
+        location = "two";
+    if(x==0 && y==2)
+        location = "three";
+    if(x==1 && y==0)
+        location = "four";
+    if(x==1 && y==1)
+        location = "five";
+    if(x==1 && y==2)
+        location = "six";
+    if(x==2 && y==0)
+        location = "seven";
+    if(x==2 && y==1)
+        location = "eight";
+    if(x==2 && y==2)
+        location = "nine";
+    //now we need to make the highlight
+    document.getElementById(location).style.background = "seagreen";
+    var background_color = document.getElementById("one").background;
+    console.log(background_color);
+    document.getElementById(location).style.color = "white";
+
+    //the function is working properly
+}
 
 
 
