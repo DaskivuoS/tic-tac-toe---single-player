@@ -1296,6 +1296,73 @@ function fillup()
     //for some reason the answer is getting doubled, but that does not matter
     return answers;
 }
+function continue_streak()
+{
+    //this continues two filled cells to get a streak                                                               *
+    //***************************************************************************************************************
+    //first we need to get a list of all the cells filled by the user in support
+    //console.log("We are "+self+" and we play for the sign of "+self_sign);
+    //first we need to identify all the spots occupied by the supporting team
+    var selected_cells = new Array();
+    var selected_cells_counter = 0;
+    for(var i=0;i<3;i++)
+    {
+        for(var j=0;j<3;j++)
+        {
+            var cell_content = table[i][j];
+            if(cell_content == self_sign)
+            {
+                //we need to store it as our supporting team's choice
+                var cell_address = (i*10)+j;
+                selected_cells[selected_cells_counter] = cell_address;
+                selected_cells_counter++;
+            }
+        }
+    }
+    //now we print the filled up cells for testing purposes
+    //console.log("The following are cells filled up by the player we support");
+    for(var i=0;i<selected_cells_counter;i++)
+    {
+        //console.log(selected_cells[i]);
+    }
+    //now we look for a probable streak
+    var streak_possibility = new Array();
+    var streak_possibility_counter = 0;
+    for(var i=0;i<selected_cells_counter;i++)
+    {
+        var matcher_one = selected_cells[i];
+        for(var j=0;j<selected_cells_counter;j++)
+        {
+            var matcher_two = selected_cells[j]
+            //we can not allow the same cell to match
+            if(matcher_one==matcher_two)
+                continue;
+            var possibility = pattern_finder(matcher_one,matcher_two)
+            //console.log("We are matching "+matcher_one+" with "+matcher_two+" and we got "+possibility+" as a possibility");
+            //now we need to check if the target is taken or empty
+            var x_coordinate = Math.floor(possibility/10);
+            var y_coordinate = possibility%10;
+            var status = free_check(x_coordinate,y_coordinate);
+            //console.log("We check the status of "+x_coordinate+","+y_coordinate+" and we find that it is "+status);
+            //we count it in only if it is free
+            if(status == "free")
+            {
+                //now we add it to the possible solutions
+                streak_possibility[streak_possibility_counter] = possibility;
+                streak_possibility_counter++;
+            }
+        }
+    }
+    //now we display the winning cell(s)
+    //console.log("Now we present our winning deals");
+    for(var i=0;i<streak_possibility_counter;i++)
+    {
+        //console.log(streak_possibility[i]);
+    }
+    //now we return the array containing the winning deals
+    return streak_possibility;
+    //this is working alright
+}
 function block_opponent()
 {
     var result = 0;//this simply holds the information whether a button has been pressed or not
@@ -1462,6 +1529,7 @@ function assignment(x)
 }
 function complex_gamer(x)
 {
+    console.log("The complex gaming mechanism takes on from now on ------------------------------------");
     var self = "";//this assigns a player to the computer as Player1 Player2, initiated with null value
     var self_sign = "";//this holds the symbol the computer is playing for
     assignment(x);
@@ -1507,25 +1575,57 @@ function complex_gamer(x)
         console.log("is/are the possible option(s)");
         //the above piece of code is working alright
 
+        //now we check if there can be made any streaks for a score
+        //we shall store the count of such possibilities as options_secondary_count
+        //we need to call the function continue_streak()
+        var continue_streak_points = continue_streak();
+        var continue_streak_points_count = continue_streak_points.length;
+
         //if we find suitable targets we should press the button, if not, we go on to the next step
-        if(options_primary_count>0)
+        if(options_primary_count>0 || continue_streak_points_count>0)
         {
-            console.log("there is a possibility of one win");
-            //we drive an infinite loop here obtaining random numbers and it shall be broken when one number can get selected
-            for(var i=1;i>0;i++)
+            //this section attempts for fill-in-the-blank
+            if(options_primary_count>0)
             {
-                var random = Math.random();
-                random = Math.floor(random*10);
-                console.log("The random value is "+random);
-                var current_possibility = options_primary[random];
-                console.log(current_possibility+" is the value we get");
-                if(current_possibility != undefined)
+                console.log("there is a possibility of one win by filling up the blank");
+                //we drive an infinite loop here obtaining random numbers and it shall be broken when one number can get selected
+                for(var i=1;i>0;i++)
                 {
-                    console.log("This value is very feasible indeed !");
-                    //now we place the bet
-                    button_press(current_possibility);
-                    console.log("We place the bet !");
-                    break;
+                    var random = Math.random();
+                    random = Math.floor(random*10);
+                    console.log("The random value is "+random);
+                    var current_possibility = options_primary[random];
+                    console.log(current_possibility+" is the value we get");
+                    if(current_possibility != undefined)
+                    {
+                        console.log("This value is very feasible indeed !");
+                        //now we place the bet
+                        button_press(current_possibility);
+                        console.log("We place the bet !");
+                        break;
+                    }
+                }
+            }
+            //this section attempts for extension for a streak
+            if(continue_streak_points_count>0)
+            {
+                console.log("there is a possibility of one win by extending into a streak");
+                //we drive an infinite loop here obtaining random numbers and it shall be broken when one number can get selected
+                for(var i=1;i>0;i++)
+                {
+                    var random = Math.random();
+                    random = Math.floor(random*10);
+                    console.log("The random value is "+random);
+                    var current_possibility = continue_streak_points[random];
+                    console.log(current_possibility+" is the value we get");
+                    if(current_possibility != undefined)
+                    {
+                        console.log("This value is very feasible indeed !");
+                        //now we place the bet
+                        button_press(current_possibility);
+                        console.log("We place the bet !");
+                        break;
+                    }
                 }
             }
         }
@@ -1549,6 +1649,8 @@ function complex_gamer(x)
                     }
                 }
             }
+            //the above piece only links two dots by placing another on the center
+            //now we need to design a part where the going streak shall be extented
             else
             {
                 //now we go on to block the opponent
@@ -1603,6 +1705,7 @@ function complex_gamer(x)
                     }    
                 }
             }
+            console.log("The complex gaming mechanism is called off over here");
             //this is ready
         }
     }

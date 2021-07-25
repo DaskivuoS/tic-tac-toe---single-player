@@ -45,6 +45,13 @@ the action causes the completion of a pattern
 this returns the POSSIBILITIES where a position can be filled up
 the return is in the form of an array
 -----------------------------------------------------------------------
+>>continue_streak
+this takes in no input
+the objective is to find if any further selection completes pattern
+this selects the third one for two adjoining selected cells
+this returns WINNING STREAKS
+the return is in the form of an array
+-----------------------------------------------------------------------
 >>block_opponent()
 this takes in no input
 the main objective of this function is to block the opponent
