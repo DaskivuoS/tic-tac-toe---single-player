@@ -635,7 +635,7 @@ function activate_gamer_simple()
         console.log('The simple auto player is turned off');
         gamer_simple_activation = false;
         document.getElementById('computer_player').style.display = "none";
-        document.getElementById('simple_player_button').innerHTML = "Activate the simple opponent player";
+        document.getElementById('simple_player_button').innerHTML = "Activate the simple automated player";
     }
     //first thing, the computer should know that the auto gamer is on and is set to simple
     else
@@ -691,7 +691,7 @@ function initialize_simple()
     {
         computer_player_simple = true;
         console.log('the computer as a simple opponent has been activated');
-        document.getElementById('simple_player_button').innerHTML = "Dectivate the simple opponent player";
+        document.getElementById('simple_player_button').innerHTML = "Deactivate the simple automated player";
         document.getElementById('player_choice_simple').style.display = "block";
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -700,6 +700,10 @@ function initialize_simple()
         computer_player_simple = false;
         console.log('the computer as a comple opponent has been deactivated');
         document.getElementById('simple_player_button').innerHTML = "Activate the simple automated player";
+        document.getElementById('gamebox').style.display = "block";
+        document.getElementById('utilities').style.display = "none";
+        document.getElementById('message').style.display = "block";
+        computer_player_simple = 0;
     }
 }
 //hence, we have finished writing the code for the simple co-player, where the computer acts as the co-player
@@ -1724,7 +1728,7 @@ function initialize_complex()
     {
         computer_player_complex = true;
         console.log('the computer as a complex opponent has been activated');
-        document.getElementById('complex_player_button').innerHTML = "Dectivate the complex opponent player";
+        document.getElementById('complex_player_button').innerHTML = "Deactivate the complex automated player";
         document.getElementById('player_choice_complex').style.display = "block";
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -1732,7 +1736,7 @@ function initialize_complex()
     {
         computer_player_complex = false;
         console.log('the computer as a comple opponent has been deactivated');
-        document.getElementById('complex_player_button').innerHTML = "Activate the simple automated player";
+        document.getElementById('complex_player_button').innerHTML = "Activate the complex automated player";
         document.getElementById('gamebox').style.display = "block";
         document.getElementById('utilities').style.display = "none";
         document.getElementById('message').style.display = "block";
