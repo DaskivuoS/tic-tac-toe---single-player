@@ -378,24 +378,35 @@ function refresh()
     }
     var current_player = 2;//the game starts with player 2 being the current player
     //setting the values of the buttons right
+    //setting the color of the cells right
+    //setting the background of the cells right
     document.getElementById("one").innerHTML = "v";
     document.getElementById("one").style.color = "transparent";
+    document.getElementById("one").style.background = "transparent";
     document.getElementById("two").innerHTML = "v";
     document.getElementById("two").style.color = "transparent";
+    document.getElementById("two").style.background = "transparent";
     document.getElementById("three").innerHTML = "v";
     document.getElementById("three").style.color = "transparent";
+    document.getElementById("three").style.background = "transparent";
     document.getElementById("four").innerHTML = "v";
     document.getElementById("four").style.color = "transparent";
+    document.getElementById("four").style.background = "transparent";
     document.getElementById("five").innerHTML = "v";
     document.getElementById("five").style.color = "transparent";
+    document.getElementById("five").style.background = "transparent";
     document.getElementById("six").innerHTML = "v";
     document.getElementById("six").style.color = "transparent";
+    document.getElementById("six").style.background = "transparent";
     document.getElementById("seven").innerHTML = "v";
     document.getElementById("seven").style.color = "transparent";
+    document.getElementById("seven").style.background = "transparent";
     document.getElementById("eight").innerHTML = "v";
     document.getElementById("eight").style.color = "transparent";
+    document.getElementById("eight").style.background = "transparent";
     document.getElementById("nine").innerHTML = "v";
     document.getElementById("nine").style.color = "transparent";
+    document.getElementById("nine").style.background = "transparent";
     //now bringing it to the game page
     document.getElementById('gamebox').style.display = "block";
     document.getElementById('utilities').style.display = "none";
