@@ -249,7 +249,7 @@ function evaluate()
     //the whole array is sweeped for table[i][0,1,2] being the same for horizontal match
     //the whole array is sweeped for table[0,1,2][j] being the same for vertical match
 
-    for( var i=0;i<3;i++) //------------------------------------------------------------horizontal win !
+    for( var i=0;i<3;i++)
     {
     	var valueoffirst = table[i][0];
     	var valueofsecond = table[i][1];
@@ -262,14 +262,10 @@ function evaluate()
                 document.getElementById('winner').innerHTML = "Player "+current_player+" wins the game !";
     		    //all the buttons must be frozen immediately so that no button can be pressed further
     		    blockall();
-                //now we need to highlight the winning areas
-                highlight(i,0);
-                highlight(i,1);
-                highlight(i,2);
     		    break;
     		}
     }
-    for( var i=0;i<3;i++) //------------------------------------------------------------vertical win !
+    for( var i=0;i<3;i++)
     {
     	var valueoffirst = table[0][i];
     	var valueofsecond = table[1][i];
@@ -282,10 +278,6 @@ function evaluate()
                 document.getElementById('winner').innerHTML = "Player "+current_player+" wins the game !";
                 //all the buttons must be frozen immediately so that no button can be pressed further
     		    blockall();
-                //now we need to highlight the winning areas
-                 highlight(0,i);
-                 highlight(1,i);
-                 highlight(2,i);
     		    break;
     		}
     }
@@ -305,28 +297,20 @@ function evaluate()
     var four = table[2][0];
     var five = table[2][2];
     //left to right diagonal
-    if(one==three && three==five) //-----------------------------------------------------diagonal win !
+    if(one==three && three==five)
     {
     	console.log("it is a win, a diagonal cut form left top to right bottom by "+current_player+"  !");
         document.getElementById('winner').innerHTML = "Player "+current_player+" wins the game !";
         //all the buttons must be frozen immediately so that no button can be pressed further
     	blockall();
-        //now we need to highlight the winning areas
-        highlight(0,0);
-        highlight(1,1);
-        highlight(2,2);
     }
     //right to left diagonal
-    if(two==three && three==four) //-----------------------------------------------------diagonal win !
+    if(two==three && three==four)
     {
     	console.log("it is a win, a diagonal cut from right tp to left bottom by "+current_player+" !");
         document.getElementById('winner').innerHTML = "Player "+current_player+" wins the game !";
         //all the buttons must be frozen immediately so that no button can be pressed further
     	blockall();
-        //now we need to highlight the winning areas
-        highlight(0,2);
-        highlight(1,1);
-        highlight(2,0);
     }
     current_player ++;
     if(current_player == 3)
@@ -376,37 +360,40 @@ function refresh()
             table[i][j] = i*10+j; // each element is initialized with a null value
         }
     }
+    console.log("We need to stop the complex or simple automated player right now");
+    console.log("Deactivating the automated players");
+    console.log("status of simple player is "+ computer_player_simple +" and of the complex player is "+ computer_player_complex);
+    if(computer_player_simple != false)
+    {
+        var current_button = document.getElementById("simple_player_button");
+        current_button.click();
+    }
+    if(computer_player_complex != false)
+    {
+        var current_button = document.getElementById("complex_player_button");
+        current_button.click();
+    }
+    console.clear();
     var current_player = 2;//the game starts with player 2 being the current player
     //setting the values of the buttons right
-    //setting the color of the cells right
-    //setting the background of the cells right
     document.getElementById("one").innerHTML = "v";
     document.getElementById("one").style.color = "transparent";
-    document.getElementById("one").style.background = "transparent";
     document.getElementById("two").innerHTML = "v";
     document.getElementById("two").style.color = "transparent";
-    document.getElementById("two").style.background = "transparent";
     document.getElementById("three").innerHTML = "v";
     document.getElementById("three").style.color = "transparent";
-    document.getElementById("three").style.background = "transparent";
     document.getElementById("four").innerHTML = "v";
     document.getElementById("four").style.color = "transparent";
-    document.getElementById("four").style.background = "transparent";
     document.getElementById("five").innerHTML = "v";
     document.getElementById("five").style.color = "transparent";
-    document.getElementById("five").style.background = "transparent";
     document.getElementById("six").innerHTML = "v";
     document.getElementById("six").style.color = "transparent";
-    document.getElementById("six").style.background = "transparent";
     document.getElementById("seven").innerHTML = "v";
     document.getElementById("seven").style.color = "transparent";
-    document.getElementById("seven").style.background = "transparent";
     document.getElementById("eight").innerHTML = "v";
     document.getElementById("eight").style.color = "transparent";
-    document.getElementById("eight").style.background = "transparent";
     document.getElementById("nine").innerHTML = "v";
     document.getElementById("nine").style.color = "transparent";
-    document.getElementById("nine").style.background = "transparent";
     //now bringing it to the game page
     document.getElementById('gamebox').style.display = "block";
     document.getElementById('utilities').style.display = "none";
@@ -416,39 +403,7 @@ function refresh()
     //we need to make the page scroll to the top
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-//this section works on highlighting the deemed cell
-function highlight(x,y)
-{
-    //it takes the coordinates and highlights the cell
-
-    //first it needs to locate the targetted division
-    var location = "";
-    if(x==0 && y==0)
-        location = "one";
-    if(x==0 && y==1)
-        location = "two";
-    if(x==0 && y==2)
-        location = "three";
-    if(x==1 && y==0)
-        location = "four";
-    if(x==1 && y==1)
-        location = "five";
-    if(x==1 && y==2)
-        location = "six";
-    if(x==2 && y==0)
-        location = "seven";
-    if(x==2 && y==1)
-        location = "eight";
-    if(x==2 && y==2)
-        location = "nine";
-    //now we need to make the highlight
-    document.getElementById(location).style.background = "seagreen";
-    var background_color = document.getElementById("one").background;
-    console.log(background_color);
-    document.getElementById(location).style.color = "white";
-
-    //the function is working properly
-}
+//this line was added just to make the number of lines of code to 333 because it felt awesome
 
 
 
@@ -757,7 +712,7 @@ function initialize_simple()
     else
     {
         computer_player_simple = false;
-        console.log('the computer as a comple opponent has been deactivated');
+        console.log('the computer as a simple opponent has been deactivated');
         document.getElementById('simple_player_button').innerHTML = "Activate the simple automated player";
         document.getElementById('gamebox').style.display = "block";
         document.getElementById('utilities').style.display = "none";
@@ -1794,7 +1749,7 @@ function initialize_complex()
     else
     {
         computer_player_complex = false;
-        console.log('the computer as a comple opponent has been deactivated');
+        console.log('the computer as a complex opponent has been deactivated');
         document.getElementById('complex_player_button').innerHTML = "Activate the complex automated player";
         document.getElementById('gamebox').style.display = "block";
         document.getElementById('utilities').style.display = "none";
