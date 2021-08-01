@@ -6,3 +6,7 @@ this is a single-device tic-tac-toe game powered by javascript, it has provision
 25-07-2021--6.46PM: the earlier version had a problem with the complex player because it could not comprehend the third addition to a set of two consecutive selections though it could fill up the space between two non-consecutive choices. This is an update with the necessary reformation
 25-07-2021--11:52PM: the winning cells now highlight themselves
 30-07-2021--08.02PM: the winning streaks, being highlighted, used to remain highlighted even when a refresh is requested. This was because the background color was not getting rectified. Now this has been fixed. There is a full refresh on pressing the refresh button. A simple addition of code in the refresh function of logic.js
+01-08-2021--08:57PM: there used to be a problem with the system, specifically with the use of the refresh button that it, though retained the computer player activated, did not proceed on to it's turn. Also the refresh inevitably brought the status to starting with turn of second player. This has been changed, that the refresh always
+                     brings the turn to the player 1
+                     deactivates any player activated
+                     clears the console
